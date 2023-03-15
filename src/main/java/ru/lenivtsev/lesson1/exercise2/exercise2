@@ -1,0 +1,62 @@
+1) нет класса Engine
+2) в классе Lory интерфейсы Moveable, Stopable должны имплементироваться, а не наследоваться
+3) в классе Lorry должен был переопределен метод open
+4) у класса Car и интерфейсов модификатор доступа по умолчанию, т.е. если класс или интерфейсы будут находиться в другой папке,
+ использовать их не получится, нужно public
+5) у метода open не проставлен модификатор доступа, нужно проставить public\protected
+5) у переопределенного метода open должен быть проставлен модификатор доступа, не ниже public\protected, так как
+без модификатора мы понижаем права
+
+interface Moveable {
+    void move();
+}
+interface Stopable {
+    void stop();
+}
+abstract class Car {
+    public Engine engine;
+
+    private String color;
+    private String name;
+    protected void start() {
+        System.out.println("Car starting");
+    }
+    abstract void open();
+    public Engine getEngine() {
+        return engine;
+    }
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+class LightWeightCar extends Car implements Moveable {
+    @Override
+    void open() {
+        System.out.println("Car is open");
+    }
+    @Override
+    public void move() {
+        System.out.println("Car is moving");
+    }
+}
+class Lorry extends Car, Moveable, Stopable {
+    public void move(){
+        System.out.println("Car is moving");
+    }
+    public void stop(){
+        System.out.println("Car is stop");
+    }
+}
+
